@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.loginflow.R
 import com.example.loginflow.navigation.NavScreen
+import com.example.loginflow.presentation.components.ButtonComponent
 import com.example.loginflow.presentation.components.CheckboxComponent
+import com.example.loginflow.presentation.components.DividerComponent
 import com.example.loginflow.presentation.components.HeadingTextComponent
 import com.example.loginflow.presentation.components.NormalTextComponent
 import com.example.loginflow.presentation.components.PasswordTextField
@@ -60,6 +62,12 @@ fun SignUpScreen(navController: NavController) {
                 text = stringResource(id = R.string.terms_and_conditions),
                 onTextSelected = { navController.navigate(NavScreen.ConditionsScreen.route) }
             )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            ButtonComponent(value = stringResource(id = R.string.register))
+
+            DividerComponent()
 
         }
 
