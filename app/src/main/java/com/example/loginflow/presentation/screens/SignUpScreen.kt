@@ -18,6 +18,7 @@ import com.example.loginflow.R
 import com.example.loginflow.navigation.NavScreen
 import com.example.loginflow.presentation.components.ButtonComponent
 import com.example.loginflow.presentation.components.CheckboxComponent
+import com.example.loginflow.presentation.components.ClickableLoginTextComponent
 import com.example.loginflow.presentation.components.DividerComponent
 import com.example.loginflow.presentation.components.HeadingTextComponent
 import com.example.loginflow.presentation.components.NormalTextComponent
@@ -68,6 +69,8 @@ fun SignUpScreen(navController: NavController) {
             ButtonComponent(value = stringResource(id = R.string.register))
 
             DividerComponent()
+            
+            ClickableLoginTextComponent(onTextSelected = {})
 
         }
 

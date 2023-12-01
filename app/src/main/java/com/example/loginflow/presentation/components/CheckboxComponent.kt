@@ -3,18 +3,13 @@ package com.example.loginflow.presentation.components
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.example.loginflow.ui.theme.Primary
 
 @Composable
 fun CheckboxComponent(
@@ -41,41 +36,3 @@ fun CheckboxComponent(
     }
 }
 
-@Composable
-fun ClickableTextComponent(
-    text: String,
-    onTextSelected: (String) -> Unit
-) {
-    val initialText = "By continuing, you accept our "
-    val privacyPolicyText = "Privacy Policy"
-    val andText = " and "
-    val termsText = "Terms of Use"
-
-    val annotatedString = buildAnnotatedString {
-        append(initialText)
-
-        withStyle(style = SpanStyle(color = Primary)) {
-            pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
-            append(privacyPolicyText)
-        }
-
-        append(andText)
-
-        withStyle(style = SpanStyle(color = Primary)) {
-            pushStringAnnotation(tag = termsText, annotation = termsText)
-            append(termsText)
-        }
-    }
-
-    ClickableText(
-        text = annotatedString,
-        onClick = { offset ->
-            annotatedString.getStringAnnotations(offset, offset)
-                .firstOrNull()?.also { span ->
-                    if (span.item == termsText || span.item == privacyPolicyText) {
-                        onTextSelected(span.item)
-                    }
-                }
-        }
-    )
-}
