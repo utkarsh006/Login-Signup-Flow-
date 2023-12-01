@@ -1,4 +1,4 @@
-package com.example.loginflow.components
+package com.example.loginflow.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth

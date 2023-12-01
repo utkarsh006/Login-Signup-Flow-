@@ -1,4 +1,4 @@
-package com.example.loginflow.screens
+package com.example.loginflow.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,12 +14,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.loginflow.navigation.AppRouter
 import com.example.loginflow.R
-import com.example.loginflow.components.CheckboxComponent
-import com.example.loginflow.components.HeadingTextComponent
-import com.example.loginflow.components.NormalTextComponent
-import com.example.loginflow.components.PasswordTextField
-import com.example.loginflow.components.UserTextField
+import com.example.loginflow.navigation.Screen
+import com.example.loginflow.presentation.components.CheckboxComponent
+import com.example.loginflow.presentation.components.HeadingTextComponent
+import com.example.loginflow.presentation.components.NormalTextComponent
+import com.example.loginflow.presentation.components.PasswordTextField
+import com.example.loginflow.presentation.components.UserTextField
 
 @Composable
 fun SignUpScreen() {
@@ -55,7 +57,10 @@ fun SignUpScreen() {
                 painterResource(id = R.drawable.lock)
             )
 
-            CheckboxComponent(text = stringResource(id = R.string.terms_and_conditions))
+            CheckboxComponent(
+                text = stringResource(id = R.string.terms_and_conditions),
+                onTextSelected = { AppRouter.navigateTo(Screen.ConditionsScreen) }
+            )
 
         }
 

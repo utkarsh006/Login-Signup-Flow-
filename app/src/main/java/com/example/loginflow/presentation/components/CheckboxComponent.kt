@@ -1,9 +1,8 @@
-package com.example.loginflow.components
+package com.example.loginflow.presentation.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
@@ -18,7 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.example.loginflow.ui.theme.Primary
 
 @Composable
-fun CheckboxComponent(text: String) {
+fun CheckboxComponent(
+    text: String,
+    onTextSelected: (String) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,13 +36,16 @@ fun CheckboxComponent(text: String) {
             }
         )
 
-        ClickableTextComponent(text = text)
+        ClickableTextComponent(text = text, onTextSelected)
 
     }
 }
 
 @Composable
-fun ClickableTextComponent(text: String) {
+fun ClickableTextComponent(
+    text: String,
+    onTextSelected: (String) -> Unit
+) {
     val initialText = "By continuing, you accept our "
     val privacyPolicyText = "Privacy Policy"
     val andText = " and "
@@ -66,8 +71,10 @@ fun ClickableTextComponent(text: String) {
         text = annotatedString,
         onClick = { offset ->
             annotatedString.getStringAnnotations(offset, offset)
-                .firstOrNull()?.also {
-
+                .firstOrNull()?.also { span ->
+                    if (span.item == termsText || span.item == privacyPolicyText) {
+                        onTextSelected(span.item)
+                    }
                 }
         }
     )
