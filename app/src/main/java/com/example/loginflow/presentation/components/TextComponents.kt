@@ -28,9 +28,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.loginflow.R
+import com.example.loginflow.ui.theme.GrayColor
 import com.example.loginflow.ui.theme.Primary
 import com.example.loginflow.ui.theme.TextColor
 import com.example.loginflow.ui.theme.WhiteColor
@@ -156,5 +158,23 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
         } else {
             PasswordVisualTransformation()
         }
+    )
+}
+
+@Composable
+fun UnderlinedTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal
+        ),
+        color = GrayColor,
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
     )
 }

@@ -57,10 +57,16 @@ fun ClickableTextComponent(
 
 @Composable
 fun ClickableLoginTextComponent(
+    tryingToLogin: Boolean = true,
     onTextSelected: (String) -> Unit
 ) {
-    val initialText = "Already have an account? "
-    val loginText = "Login"
+    val initialText = if(tryingToLogin) {
+        "Already have an account? "
+    } else{
+        "Don't have an account yet? "
+    }
+
+    val loginText = if(tryingToLogin) "Login" else "Register"
 
     val annotatedString = buildAnnotatedString {
         append(initialText)
