@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -20,10 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -91,7 +94,9 @@ fun UserTextField(labelValue: String, painterResource: Painter) {
             cursorColor = Primary,
             focusedContainerColor = WhiteColor,
         ),
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        singleLine = true,
+        maxLines = 1,
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(20.dp),
@@ -106,6 +111,7 @@ fun UserTextField(labelValue: String, painterResource: Painter) {
 fun PasswordTextField(labelValue: String, painterResource: Painter) {
     val password = remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
+    val localFocus = LocalFocusManager.current
 
     OutlinedTextField(
         modifier = Modifier
@@ -124,8 +130,15 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
             focusedContainerColor = WhiteColor,
         ),
 
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done
+        ),
+        singleLine = true,
+        maxLines = 1,
+        keyboardActions = KeyboardActions {
+            localFocus.clearFocus()
+        },
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(20.dp),
